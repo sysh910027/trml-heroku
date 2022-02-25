@@ -1,4 +1,9 @@
-function verify(fracUp, fracBot, squareRoot) {
+const qVer=process.env.QVER;
+
+function verify(qNum, fracUp, fracBot, squareRoot) {
+  var fs = require('fs');
+  var obj = JSON.parse(fs.readFileSync("./data/"+qVer+".json", 'utf8'));
+  return ([fracUp, fracBot, squareRoot]===obj[qNum]);
 }
 
 
@@ -22,7 +27,7 @@ server.on('connection', ws => {
     ws.on('message', message => {
         // [Qnum, fracUp, fracBot, squareRoot, team]
         message=message.split(";");
-        let correct=verifyAns(message[1],message[2],message[3]);
+        let correct=verifyAns(message[0], message[1],message[2],message[3]);
         // クライアントにデータを返信
         server.clients.forEach(client => {
             client.send(message[0]+"; "+correct+"; "+message[4]);
