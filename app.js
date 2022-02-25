@@ -3,7 +3,7 @@ const qVer=process.env.QVER;
 function verify(qNum, fracUp, fracBot, squareRoot) {
   var fs = require('fs');
   var obj = JSON.parse(fs.readFileSync("./data/"+qVer+".json", 'utf8'));
-  return ([fracUp, fracBot, squareRoot]===obj[qNum]);
+  return ([fracUp, fracBot, squareRoot]===obj.ans[qNum]);
 }
 
 
