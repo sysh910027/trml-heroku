@@ -38,6 +38,19 @@ server.on('connection', ws => {
 const express = require('express');
 const app = express();
 
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+
+app.post("/login", (req, res)=> {
+  req.session=req.body.username;
+  res.end("Logged in");
+});
+
 app.use(express.static('public'));
 
 app.listen(80);
