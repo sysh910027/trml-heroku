@@ -57,10 +57,10 @@ app.post("/login", (req, res)=> {
 });
 
 app.get("/ans/:qNum", (req, res)=>{
-  res.sendFile("./data/"+req.params.qNum+".jpg");
+  res.sendFile("./data/"+qVer+"/"+req.params.qNum+".jpg");
 });
 app.get("/qFig/:qNum", (req, res)=>{
-  res.sendFile("./data/qFig-"+req.params.qNum+".jpg");
+  res.sendFile("./data/"+qVer+"/qFig-"+req.params.qNum+".jpg");
 });
 
 app.use(express.static('public'));
