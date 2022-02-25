@@ -1,5 +1,8 @@
-const uri = process.env.MONGODB_URI;
+function verify(fracUp, fracBot, squareRoot) {
+}
 
+
+const uri = process.env.MONGODB_URI
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -17,11 +20,12 @@ const server = new ws.Server({port:5001});
 server.on('connection', ws => {
     // クライアントからのデータ受信時に呼ばれる
     ws.on('message', message => {
+        // [Qnum, fracUp, fracBot, squareRoot, team]
         message=message.split(";");
-        let correct=verifyAns(message[1]);
+        let correct=verifyAns(message[1],message[2],message[3]);
         // クライアントにデータを返信
         server.clients.forEach(client => {
-            client.send(message[0]+"; "+correct);
+            client.send(message[0]+"; "+correct+"; "+message[4]);
         });
     });
 
