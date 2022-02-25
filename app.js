@@ -56,6 +56,10 @@ app.post("/login", (req, res)=> {
   res.end("Logged in");
 });
 
+app.get("/ans/:qNum", (req, res)=>{
+  res.sendFile("./data/"+req.params.qNum+".jpg");
+});
+
 app.use(express.static('public'));
 
 app.listen(80);
